@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0a192f">
+    <title>Sesli Kitap Kütüphanesi</title>
+    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="manifest" href="manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Elements for Premium Feel -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="app-container">
+        
+        <!-- ================= LIBRARY VIEW ================= -->
+        <div id="libraryView" class="view active">
+            <header class="header">
+                <div class="header-info left-align">
+                    <span class="greeting">İyi Günler</span>
+                    <h1 class="page-title">Ana Sayfa</h1>
+                </div>
+                <button class="icon-btn glass-btn" id="openAddBookModalBtn" title="Yeni Kitap Ekle">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </header>
+
+            <main class="library-content">
+                <div id="emptyLibraryMsg" class="empty-state">
+                    <i class="fas fa-books empty-icon"></i>
+                    <p>Kitaplığınız boş. Hemen yeni bir sesli kitap ekleyin!</p>
+                </div>
+                
+                <div id="bookGrid" class="book-grid">
+                    <!-- Books will be dynamically injected here -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= FAVORITES VIEW ================= -->
+        <div id="favoritesView" class="view">
+            <header class="header">
+                <div class="header-info left-align">
+                    <span class="greeting">Seçtikleriniz</span>
+                    <h1 class="page-title">Kitaplığım</h1>
+                </div>
+            </header>
+
+            <main class="library-content">
+                <div id="emptyFavoritesMsg" class="empty-state">
+                    <i class="far fa-heart empty-icon"></i>
+                    <p>Henüz favorilere eklediğiniz bir kitap yok.</p>
+                </div>
+                
+                <div id="favoritesGrid" class="book-grid">
+                    <!-- Favorite books will be dynamically injected here -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= SEARCH VIEW ================= -->
+        <div id="searchView" class="view">
+            <header class="header" style="flex-direction: column; align-items: stretch; gap: 15px;">
+                <div class="header-info left-align">
+                    <h1 class="page-title">Ara</h1>
+                </div>
+                <div class="search-bar-container" style="position: relative;">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                    <input type="text" id="searchInput" placeholder="Kitap veya yazar ara..." style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none;">
+                </div>
+            </header>
+
+            <main class="library-content">
+                <div id="emptySearchMsg" class="empty-state" style="display: none;">
+                    <i class="fas fa-search empty-icon"></i>
+                    <p>Arama kriterlerinize uygun kitap bulunamadı.</p>
+                </div>
+                
+                <div id="searchGrid" class="book-grid">
+                    <!-- Search results will be dynamically injected here -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= PLAYER VIEW ================= -->
+        <div id="playerView" class="view">
+            <header class="header">
+                <button class="icon-btn glass-btn" id="backToLibraryBtn"><i class="fas fa-chevron-down"></i></button>
+                <div class="header-info">
+                    <span class="playing-from">ŞU AN ÇALINIYOR</span>
+                    <span class="playlist-name" id="playerBookTitleSmall">Kitap Seçilmedi</span>
+                </div>
+                <button class="icon-btn glass-btn"><i class="fas fa-ellipsis-v"></i></button>
+            </header>
+
+            <main class="main-content">
+                <div class="cover-wrapper">
+                    <div class="cover-glass-effect">
+                        <img src="" alt="Kitap Kapağı" class="book-cover" id="playerBookCover">
+                    </div>
+                </div>
+                
+                <div class="book-info">
+                    <div class="title-wrapper">
+                        <h1 class="book-title" id="playerBookTitle">Kitap Adı</h1>
+                        <p class="book-author" id="playerBookAuthor">Yazar Adı</p>
+                    </div>
+                    <div class="book-info-actions">
+                        <button class="icon-btn glass-btn" id="openAddNoteModalBtn" title="İşaretle ve Not Ekle"><i class="fas fa-bookmark"></i></button>
+                        <button class="icon-btn glass-btn" id="openNotesListModalBtn" title="Notlarım"><i class="fas fa-list-alt"></i></button>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-container">
+                    <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+                    <div class="time-info">
+                        <span id="currentTime">0:00</span>
+                        <span id="totalTime">0:00</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-container">
+                    <button class="icon-btn text-btn" id="speedBtn" title="Çalma Hızı">1x</button>
+                    <button class="icon-btn large" id="rewindBtn" title="15 Saniye Geri"><i class="fas fa-undo"></i> <span>15</span></button>
+                    <button class="play-btn" id="playPauseBtn"><i class="fas fa-play" id="playIcon"></i></button>
+                    <button class="icon-btn large" id="forwardBtn" title="15 Saniye İleri"><i class="fas fa-redo"></i> <span>15</span></button>
+                    <button class="icon-btn" id="sleepTimerBtn" title="Uyku Zamanlayıcı"><i class="far fa-clock"></i></button>
+                </div>
+            </main>
+        </div>
+        
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav glass-nav">
+            <button class="nav-item active" id="navLibraryBtn">
+                <i class="fas fa-home"></i>
+                <span>Ana Sayfa</span>
+            </button>
+            <button class="nav-item" id="navSearchBtn">
+                <i class="fas fa-search"></i>
+                <span>Ara</span>
+            </button>
+            <button class="nav-item" id="navFavoritesBtn">
+                <i class="fas fa-heart"></i>
+                <span>Kitaplığım</span>
+            </button>
+        </nav>
+        
+        <!-- ================= ADD BOOK MODAL ================= -->
+        <div id="addBookModal" class="modal">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Yeni Kitap Ekle</h2>
+                    <button class="icon-btn" id="closeAddBookModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <form id="addBookForm">
+                    <div class="form-group">
+                        <label for="bookTitleInput">Kitap Adı</label>
+                        <input type="text" id="bookTitleInput" required placeholder="Örn: Küçük Prens">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAuthorInput">Yazar</label>
+                        <input type="text" id="bookAuthorInput" required placeholder="Örn: Antoine de Saint-Exupéry">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookCoverInput">Kapak Resmi (Opsiyonel)</label>
+                        <label for="bookCoverInput" class="file-label-btn">
+                            <i class="fas fa-image"></i>
+                            <span id="coverFileName">Resim Seç (Opsiyonel)</span>
+                        </label>
+                        <input type="file" id="bookCoverInput" accept="image/*" class="file-input-hidden">
+                    </div>
+                    <div class="form-group">
+                        <label for="bookAudioInput">Ses Dosyası (MP3, M4A...)</label>
+                        <label for="bookAudioInput" class="file-label-btn">
+                            <i class="fas fa-music"></i>
+                            <span id="audioFileName">Ses Dosyası Seç</span>
+                        </label>
+                        <input type="file" id="bookAudioInput" required class="file-input-hidden">
+                    </div>
+                    <button type="submit" class="submit-btn" id="saveBookBtn">Kitabı Kaydet <i class="fas fa-save"></i></button>
+                    <p id="savingMsg" class="hidden loading-text">Kaydediliyor, lütfen bekleyin...</p>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= ADD NOTE MODAL ================= -->
+        <div id="addNoteModal" class="modal">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Not Bırak</h2>
+                    <button class="icon-btn" id="closeAddNoteModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <p style="margin-bottom: 15px; color: var(--accent-color);">İşaretlenen Süre: <span id="noteTimestampDisplay">0:00</span></p>
+                <form id="addNoteForm">
+                    <div class="form-group">
+                        <label for="noteTextInput">Notunuz</label>
+                        <input type="text" id="noteTextInput" required placeholder="Bu kısım çok önemliydi..." autocomplete="off">
+                    </div>
+                    <button type="submit" class="submit-btn">Notu Kaydet <i class="fas fa-check"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ================= NOTES LIST MODAL ================= -->
+        <div id="notesListModal" class="modal">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Kitap Notlarım</h2>
+                    <button class="icon-btn" id="closeNotesListModalBtn"><i class="fas fa-times"></i></button>
+                </div>
+                <div id="emptyNotesMsg" class="empty-state" style="height: 100px;">
+                    <p>Bu kitaba henüz not eklemediniz.</p>
+                </div>
+                <div id="notesListContainer" class="notes-list">
+                    <!-- Notes will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= SPEED MODAL ================= -->
+        <div class="modal" id="speedModal">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h3>Çalma Hızı</h3>
+                    <button class="icon-btn" id="closeSpeedModal"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="speed-options">
+                    <button class="speed-option" data-speed="0.5">0.5x</button>
+                    <button class="speed-option" data-speed="0.75">0.75x</button>
+                    <button class="speed-option active" data-speed="1">1x (Normal)</button>
+                    <button class="speed-option" data-speed="1.25">1.25x</button>
+                    <button class="speed-option" data-speed="1.5">1.5x</button>
+                    <button class="speed-option" data-speed="2">2x</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="audioPlayer"></audio>
+
+    <!-- IndexedDB Wrapper localforage for easier usage if we wanted, but we will use raw indexedDB to avoid external dependencies -->
+    <script src="app.js?v=12"></script>
+</body>
+</html>
