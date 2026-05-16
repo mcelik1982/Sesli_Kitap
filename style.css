@@ -296,6 +296,48 @@ button {
     overflow: hidden;
     background-color: var(--gradient-2);
     box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.book-card-image-wrapper.active-card {
+    border-color: rgba(100, 255, 218, 0.3);
+    box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
+}
+
+.playing-indicator {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: none;
+    align-items: flex-end;
+    gap: 3px;
+    height: 20px;
+    z-index: 10;
+    padding: 6px;
+    background: rgba(10, 25, 47, 0.7);
+    border-radius: 8px;
+    backdrop-filter: blur(4px);
+}
+
+.is-playing .playing-indicator {
+    display: flex;
+}
+
+.playing-indicator span {
+    width: 3px;
+    background-color: var(--accent-color);
+    border-radius: 1px;
+    animation: wave 1s ease-in-out infinite;
+}
+
+.playing-indicator span:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+.playing-indicator span:nth-child(2) { height: 80%; animation-delay: 0.3s; }
+.playing-indicator span:nth-child(3) { height: 60%; animation-delay: 0.2s; }
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.5); }
 }
 
 .delete-book-btn {

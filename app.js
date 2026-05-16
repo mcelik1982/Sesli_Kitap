@@ -103,16 +103,14 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if(viewId === 'libraryView') {
             navItems[0].classList.add('active'); // Ana Sayfa
-            if (isPlaying && typeof togglePlay === 'function') togglePlay();
+            updateBookCardsUI();
         } else if(viewId === 'searchView') {
             navItems[1].classList.add('active'); // Ara
             searchInput.value = '';
             renderSearch('');
-            if (isPlaying && typeof togglePlay === 'function') togglePlay();
         } else if(viewId === 'favoritesView') {
             navItems[2].classList.add('active'); // Kitaplığım
             renderFavorites();
-            if (isPlaying && typeof togglePlay === 'function') togglePlay();
         }
     }
 
@@ -281,9 +279,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const favClass = book.isFavorite ? 'active' : '';
 
+            const isCurrent = (book.id === currentBookId);
+            const playingClass = (isCurrent && isPlaying) ? 'is-playing' : '';
+            const activeClass = isCurrent ? 'active-card' : '';
+
             card.innerHTML = `
-                <div class="book-card-image-wrapper">
+                <div class="book-card-image-wrapper ${activeClass} ${playingClass}">
                     <img src="${coverUrl}" alt="${book.title}" class="book-card-cover">
+                    <div class="playing-indicator">
+                        <span></span><span></span><span></span>
+                    </div>
                     <button class="favorite-book-btn ${favClass}" data-id="${book.id}" title="Favori"><i class="fas fa-heart"></i></button>
                     <button class="delete-book-btn" data-id="${book.id}" title="Kitabı Sil"><i class="fas fa-trash"></i></button>
                 </div>
@@ -342,6 +347,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- Player Logic ----
     function loadAndPlayBook(book, coverUrl) {
+        // If the book is already playing, just switch to player view
+        if (currentBookId === book.id) {
+            switchView('playerView');
+            return;
+        }
+
         currentBookId = book.id;
         
         // Update UI
@@ -389,6 +400,28 @@ document.addEventListener('DOMContentLoaded', () => {
             playIcon.classList.remove('fa-pause');
             playIcon.classList.add('fa-play');
             playerBookCover.classList.remove('playing');
+        }
+        
+        // Update any active book cards in the grid
+        updateBookCardsUI();
+    }
+
+    function updateBookCardsUI() {
+        document.querySelectorAll('.book-card-image-wrapper').forEach(wrapper => {
+            wrapper.classList.remove('is-playing');
+        });
+        
+        if (isPlaying && currentBookId) {
+            // Find the card for the current book and add playing class
+            // We need to match by something... let's re-render or just search for the buttons with data-id
+            const activeBtn = document.querySelector(`.favorite-book-btn[data-id="${currentBookId}"]`);
+            if (activeBtn) {
+                const wrapper = activeBtn.closest('.book-card-image-wrapper');
+                if (wrapper) {
+                    wrapper.classList.add('is-playing');
+                    wrapper.classList.add('active-card');
+                }
+            }
         }
     }
 
