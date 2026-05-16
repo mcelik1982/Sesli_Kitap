@@ -137,20 +137,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ---- File Input UI Updates ----
     bookCoverInput.addEventListener('change', (e) => {
-        const span = document.querySelector('label[for="bookCoverInput"] span');
         if(e.target.files.length > 0) {
-            if(span) span.textContent = e.target.files[0].name;
+            coverFileName.textContent = e.target.files[0].name;
         } else {
-            if(span) span.textContent = 'Resim Seç (Opsiyonel)';
+            coverFileName.textContent = 'Resim Seç';
         }
     });
 
     bookAudioInput.addEventListener('change', (e) => {
-        const span = document.querySelector('label[for="bookAudioInput"] span');
         if(e.target.files.length > 0) {
-            if(span) span.textContent = e.target.files[0].name;
+            audioFileName.textContent = e.target.files[0].name;
         } else {
-            if(span) span.textContent = 'Ses Dosyası Seç';
+            audioFileName.textContent = 'Ses Seç';
         }
     });
 
@@ -161,6 +159,11 @@ document.addEventListener('DOMContentLoaded', () => {
     addBookForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        if(!db) {
+            alert('Veritabanı hazır değil, lütfen sayfayı yenileyip tekrar deneyin.');
+            return;
+        }
+
         const title = document.getElementById('bookTitleInput').value;
         const author = document.getElementById('bookAuthorInput').value;
         const coverFile = bookCoverInput.files[0];
@@ -185,27 +188,35 @@ document.addEventListener('DOMContentLoaded', () => {
             isFavorite: false
         };
 
-        const transaction = db.transaction(['books'], 'readwrite');
-        const objectStore = transaction.objectStore('books');
-        const request = objectStore.add(newBook);
+        try {
+            const transaction = db.transaction(['books'], 'readwrite');
+            const objectStore = transaction.objectStore('books');
+            const request = objectStore.add(newBook);
 
-        request.onsuccess = () => {
-            addBookForm.reset();
-            coverFileName.textContent = 'Dosya seçilmedi';
-            audioFileName.textContent = 'Dosya seçilmedi';
-            addBookModal.classList.remove('active');
-            
+            request.onsuccess = () => {
+                addBookForm.reset();
+                coverFileName.textContent = 'Resim Seç';
+                audioFileName.textContent = 'Ses Seç';
+                addBookModal.classList.remove('active');
+                
+                saveBookBtn.classList.remove('hidden');
+                savingMsg.classList.add('hidden');
+                
+                loadBooksFromDB(); // Refresh library
+            };
+
+            request.onerror = (event) => {
+                console.error('IndexedDB Error:', event.target.error);
+                alert('Kitap kaydedilirken bir hata oluştu: ' + event.target.error.message);
+                saveBookBtn.classList.remove('hidden');
+                savingMsg.classList.add('hidden');
+            };
+        } catch (err) {
+            console.error('Transaction Error:', err);
+            alert('İşlem başlatılamadı: ' + err.message);
             saveBookBtn.classList.remove('hidden');
             savingMsg.classList.add('hidden');
-            
-            loadBooksFromDB(); // Refresh library
-        };
-
-        request.onerror = () => {
-            alert('Kitap kaydedilirken bir hata oluştu.');
-            saveBookBtn.classList.remove('hidden');
-            savingMsg.classList.add('hidden');
-        };
+        }
     });
 
     // ---- Load Books ----

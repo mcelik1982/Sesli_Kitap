@@ -1,15 +1,18 @@
+<!-- Version: 1.0.2 - Updated Greetings and UI -->
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#0a192f">
-    <title>Sesli Kitap Kütüphanesi</title>
-    <link rel="stylesheet" href="style.css?v=12">
+    <title>Sesli Kitap - TEST</title>
+    <link rel="stylesheet" href="style.css?v=14">
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Background Elements for Premium Feel -->
     <div class="bg-shape shape-1"></div>
@@ -17,13 +20,13 @@
     <div class="bg-shape shape-3"></div>
 
     <div class="app-container">
-        
+
         <!-- ================= LIBRARY VIEW ================= -->
         <div id="libraryView" class="view active">
             <header class="header">
                 <div class="header-info left-align">
-                    <span class="greeting">İyi Günler</span>
-                    <h1 class="page-title">Ana Sayfa</h1>
+                    <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+                    <h1 class="page-title">Kütüphane</h1>
                 </div>
                 <button class="icon-btn glass-btn" id="openAddBookModalBtn" title="Yeni Kitap Ekle">
                     <i class="fas fa-plus"></i>
@@ -35,7 +38,7 @@
                     <i class="fas fa-books empty-icon"></i>
                     <p>Kitaplığınız boş. Hemen yeni bir sesli kitap ekleyin!</p>
                 </div>
-                
+
                 <div id="bookGrid" class="book-grid">
                     <!-- Books will be dynamically injected here -->
                 </div>
@@ -46,7 +49,7 @@
         <div id="favoritesView" class="view">
             <header class="header">
                 <div class="header-info left-align">
-                    <span class="greeting">Seçtikleriniz</span>
+                    <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
                     <h1 class="page-title">Kitaplığım</h1>
                 </div>
             </header>
@@ -56,7 +59,7 @@
                     <i class="far fa-heart empty-icon"></i>
                     <p>Henüz favorilere eklediğiniz bir kitap yok.</p>
                 </div>
-                
+
                 <div id="favoritesGrid" class="book-grid">
                     <!-- Favorite books will be dynamically injected here -->
                 </div>
@@ -70,8 +73,10 @@
                     <h1 class="page-title">Ara</h1>
                 </div>
                 <div class="search-bar-container" style="position: relative;">
-                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
-                    <input type="text" id="searchInput" placeholder="Kitap veya yazar ara..." style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none;">
+                    <i class="fas fa-search"
+                        style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"></i>
+                    <input type="text" id="searchInput" placeholder="Kitap veya yazar ara..."
+                        style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 12px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: var(--text-primary); outline: none;">
                 </div>
             </header>
 
@@ -80,7 +85,7 @@
                     <i class="fas fa-search empty-icon"></i>
                     <p>Arama kriterlerinize uygun kitap bulunamadı.</p>
                 </div>
-                
+
                 <div id="searchGrid" class="book-grid">
                     <!-- Search results will be dynamically injected here -->
                 </div>
@@ -104,15 +109,17 @@
                         <img src="" alt="Kitap Kapağı" class="book-cover" id="playerBookCover">
                     </div>
                 </div>
-                
+
                 <div class="book-info">
                     <div class="title-wrapper">
                         <h1 class="book-title" id="playerBookTitle">Kitap Adı</h1>
                         <p class="book-author" id="playerBookAuthor">Yazar Adı</p>
                     </div>
                     <div class="book-info-actions">
-                        <button class="icon-btn glass-btn" id="openAddNoteModalBtn" title="İşaretle ve Not Ekle"><i class="fas fa-bookmark"></i></button>
-                        <button class="icon-btn glass-btn" id="openNotesListModalBtn" title="Notlarım"><i class="fas fa-list-alt"></i></button>
+                        <button class="icon-btn glass-btn" id="openAddNoteModalBtn" title="İşaretle ve Not Ekle"><i
+                                class="fas fa-bookmark"></i></button>
+                        <button class="icon-btn glass-btn" id="openNotesListModalBtn" title="Notlarım"><i
+                                class="fas fa-list-alt"></i></button>
                     </div>
                 </div>
 
@@ -128,14 +135,17 @@
                 <!-- Controls -->
                 <div class="controls-container">
                     <button class="icon-btn text-btn" id="speedBtn" title="Çalma Hızı">1x</button>
-                    <button class="icon-btn large" id="rewindBtn" title="15 Saniye Geri"><i class="fas fa-undo"></i> <span>15</span></button>
+                    <button class="icon-btn large" id="rewindBtn" title="15 Saniye Geri"><i class="fas fa-undo"></i>
+                        <span>15</span></button>
                     <button class="play-btn" id="playPauseBtn"><i class="fas fa-play" id="playIcon"></i></button>
-                    <button class="icon-btn large" id="forwardBtn" title="15 Saniye İleri"><i class="fas fa-redo"></i> <span>15</span></button>
-                    <button class="icon-btn" id="sleepTimerBtn" title="Uyku Zamanlayıcı"><i class="far fa-clock"></i></button>
+                    <button class="icon-btn large" id="forwardBtn" title="15 Saniye İleri"><i class="fas fa-redo"></i>
+                        <span>15</span></button>
+                    <button class="icon-btn" id="sleepTimerBtn" title="Uyku Zamanlayıcı"><i
+                            class="far fa-clock"></i></button>
                 </div>
             </main>
         </div>
-        
+
         <!-- Bottom Navigation -->
         <nav class="bottom-nav glass-nav">
             <button class="nav-item active" id="navLibraryBtn">
@@ -151,7 +161,7 @@
                 <span>Kitaplığım</span>
             </button>
         </nav>
-        
+
         <!-- ================= ADD BOOK MODAL ================= -->
         <div id="addBookModal" class="modal">
             <div class="modal-content glass-panel">
@@ -160,6 +170,20 @@
                     <button class="icon-btn" id="closeAddBookModalBtn"><i class="fas fa-times"></i></button>
                 </div>
                 <form id="addBookForm">
+                    <div class="file-selection-grid">
+                        <label class="file-label-btn" title="Kapak Resmi Seç">
+                            <i class="fas fa-image"></i>
+                            <span id="coverFileName">Resim Seç</span>
+                            <input type="file" id="bookCoverInput" accept=".jpg,.jpeg,.png,.webp,image/*"
+                                class="file-input-hidden">
+                        </label>
+                        <label class="file-label-btn" title="Ses Dosyası Seç">
+                            <i class="fas fa-music"></i>
+                            <span id="audioFileName">Ses Seç</span>
+                            <input type="file" id="bookAudioInput"
+                                accept=".mp3,audio/mpeg,audio/mp4,audio/x-m4a,audio/*" class="file-input-hidden">
+                        </label>
+                    </div>
                     <div class="form-group">
                         <label for="bookTitleInput">Kitap Adı</label>
                         <input type="text" id="bookTitleInput" required placeholder="Örn: Küçük Prens">
@@ -168,23 +192,8 @@
                         <label for="bookAuthorInput">Yazar</label>
                         <input type="text" id="bookAuthorInput" required placeholder="Örn: Antoine de Saint-Exupéry">
                     </div>
-                    <div class="form-group">
-                        <label for="bookCoverInput">Kapak Resmi (Opsiyonel)</label>
-                        <label for="bookCoverInput" class="file-label-btn">
-                            <i class="fas fa-image"></i>
-                            <span id="coverFileName">Resim Seç (Opsiyonel)</span>
-                        </label>
-                        <input type="file" id="bookCoverInput" accept="image/*" class="file-input-hidden">
-                    </div>
-                    <div class="form-group">
-                        <label for="bookAudioInput">Ses Dosyası (MP3, M4A...)</label>
-                        <label for="bookAudioInput" class="file-label-btn">
-                            <i class="fas fa-music"></i>
-                            <span id="audioFileName">Ses Dosyası Seç</span>
-                        </label>
-                        <input type="file" id="bookAudioInput" required class="file-input-hidden">
-                    </div>
-                    <button type="submit" class="submit-btn" id="saveBookBtn">Kitabı Kaydet <i class="fas fa-save"></i></button>
+                    <button type="submit" class="submit-btn" id="saveBookBtn">Kitabı Kaydet <i
+                            class="fas fa-save"></i></button>
                     <p id="savingMsg" class="hidden loading-text">Kaydediliyor, lütfen bekleyin...</p>
                 </form>
             </div>
@@ -197,11 +206,13 @@
                     <h2>Not Bırak</h2>
                     <button class="icon-btn" id="closeAddNoteModalBtn"><i class="fas fa-times"></i></button>
                 </div>
-                <p style="margin-bottom: 15px; color: var(--accent-color);">İşaretlenen Süre: <span id="noteTimestampDisplay">0:00</span></p>
+                <p style="margin-bottom: 15px; color: var(--accent-color);">İşaretlenen Süre: <span
+                        id="noteTimestampDisplay">0:00</span></p>
                 <form id="addNoteForm">
                     <div class="form-group">
                         <label for="noteTextInput">Notunuz</label>
-                        <input type="text" id="noteTextInput" required placeholder="Bu kısım çok önemliydi..." autocomplete="off">
+                        <input type="text" id="noteTextInput" required placeholder="Bu kısım çok önemliydi..."
+                            autocomplete="off">
                     </div>
                     <button type="submit" class="submit-btn">Notu Kaydet <i class="fas fa-check"></i></button>
                 </form>
@@ -248,6 +259,7 @@
     <audio id="audioPlayer"></audio>
 
     <!-- IndexedDB Wrapper localforage for easier usage if we wanted, but we will use raw indexedDB to avoid external dependencies -->
-    <script src="app.js?v=12"></script>
+    <script src="app.js?v=14"></script>
 </body>
+
 </html>
