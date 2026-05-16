@@ -1,4 +1,4 @@
-<!-- Version: 1.0.2 - Updated Greetings and UI -->
+<!-- Version: 1.0.3 - Cache Refresh -->
 <!DOCTYPE html>
 <html lang="tr">
 
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#0a192f">
     <title>Sesli Kitap - TEST</title>
-    <link rel="stylesheet" href="style.css?v=14">
+    <link rel="stylesheet" href="style.css?v=18">
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -25,7 +25,10 @@
         <div id="libraryView" class="view active">
             <header class="header">
                 <div class="header-info left-align">
-                    <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+                    <div class="greeting-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/tr/0/06/MEB_Logo.png" alt="MEB Logo" class="header-logo">
+                        <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+                    </div>
                     <h1 class="page-title">Kütüphane</h1>
                 </div>
                 <button class="icon-btn glass-btn" id="openAddBookModalBtn" title="Yeni Kitap Ekle">
@@ -49,7 +52,10 @@
         <div id="favoritesView" class="view">
             <header class="header">
                 <div class="header-info left-align">
-                    <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+                    <div class="greeting-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/tr/0/06/MEB_Logo.png" alt="MEB Logo" class="header-logo">
+                        <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+                    </div>
                     <h1 class="page-title">Kitaplığım</h1>
                 </div>
             </header>
@@ -259,7 +265,7 @@
     <audio id="audioPlayer"></audio>
 
     <!-- IndexedDB Wrapper localforage for easier usage if we wanted, but we will use raw indexedDB to avoid external dependencies -->
-    <script src="app.js?v=14"></script>
+    <script src="app.js?v=18"></script>
 </body>
 
 </html>

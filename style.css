@@ -123,11 +123,25 @@ body {
     align-items: flex-start;
 }
 
+.greeting-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.header-logo {
+    height: 34px;
+    width: auto;
+    filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3));
+    object-fit: contain;
+}
+
 .greeting {
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--text-secondary);
-    margin-bottom: 4px;
+    letter-spacing: 0.3px;
 }
 
 .page-title {
