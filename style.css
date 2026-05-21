@@ -812,7 +812,37 @@ button {
     scrollbar-width: none; /* Firefox */
 }
 
-/* Notes Styles */
+
+/* Top dropdown menu */
+.top-menu {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 20;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.top-menu .menu-item {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 8px 16px;
+    text-align: left;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.top-menu .menu-item:hover {
+    background: var(--accent-color);
+    color: var(--bg-darker);
+}
+.hidden { display: none !important; }
+
 .book-info-actions {
     display: flex;
     gap: 10px;

@@ -24,16 +24,26 @@
         <!-- ================= LIBRARY VIEW ================= -->
         <div id="libraryView" class="view active">
             <header class="header">
-                <div class="header-info left-align">
-                    <div class="greeting-wrapper">
-                        <img src="meb.png" alt="MEB Logo" class="header-logo">
-                        <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
-                    </div>
-                    <h1 class="page-title">Kütüphane</h1>
-                </div>
-                <button class="icon-btn glass-btn" id="openAddBookModalBtn" title="Yeni Kitap Ekle">
-                    <i class="fas fa-plus"></i>
-                </button>
+        <div class="header-info left-align">
+            <div class="greeting-wrapper">
+                <img src="meb.png" alt="MEB Logo" class="header-logo">
+                <span class="greeting">Temel Eğitim Genel Müdürlüğü</span>
+            </div>
+            <h1 class="page-title">Kütüphane</h1>
+        </div>
+        <button class="icon-btn glass-btn" id="openAddBookModalBtn" title="Yeni Kitap Ekle">
+            <i class="fas fa-plus"></i>
+        </button>
+        <!-- Ellipsis menu button -->
+        <button class="icon-btn glass-btn" id="menuBtn" title="Menü">
+            <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <!-- Dropdown menu -->
+        <div id="topMenu" class="top-menu hidden">
+            <button class="menu-item" data-view="libraryView">Ana Sayfa</button>
+            <button class="menu-item" data-view="searchView">Ara</button>
+            <button class="menu-item" data-view="favoritesView">Kitaplığım</button>
+        </div>
             </header>
 
             <main class="library-content">
