@@ -1,15 +1,15 @@
 :root {
-    /* Premium Blue Theme Colors - Lighter */
-    --bg-main: #112a46;
-    --bg-darker: #0a192f;
-    --glass-bg: rgba(24, 45, 75, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --text-primary: #ccd6f6;
-    --text-secondary: #a8b2d1;
+    /* Premium Blue Theme Colors - Even Lighter (Marine Blue) */
+    --bg-main: #1a4971;
+    --bg-darker: #11314f;
+    --glass-bg: rgba(43, 98, 145, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: #c9e1f5;
     --accent-color: #64ffda; /* Teal accent */
     --accent-color-hover: #52e0c0;
-    --gradient-1: #1e3a5f;
-    --gradient-2: #2a4c78;
+    --gradient-1: #2a618f;
+    --gradient-2: #3a7ca5;
 }
 
 * {
