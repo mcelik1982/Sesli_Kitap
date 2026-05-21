@@ -112,6 +112,16 @@ document.addEventListener('DOMContentLoaded', () => {
             navItems[2].classList.add('active'); // Kitaplığım
             renderFavorites();
         }
+
+        // Durdurma işlemi: Eğer playerView'dan çıkılıyorsa ve kitap çalıyorsa durdur
+        if (viewId !== 'playerView' && isPlaying) {
+            audioPlayer.pause();
+            isPlaying = false;
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+            playerBookCover.classList.remove('playing');
+            updateBookCardsUI();
+        }
     }
 
     backToLibraryBtn.addEventListener('click', () => switchView('libraryView'));
@@ -350,6 +360,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // If the book is already playing, just switch to player view
         if (currentBookId === book.id) {
             switchView('playerView');
+            if (!isPlaying) {
+                togglePlay(true);
+            }
             return;
         }
 
