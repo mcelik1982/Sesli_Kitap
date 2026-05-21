@@ -25,6 +25,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100vh;
+    height: 100dvh;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -68,6 +69,7 @@ body {
     width: 100%;
     max-width: 450px;
     height: 100vh;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -91,6 +93,7 @@ body {
     display: none;
     flex-direction: column;
     height: calc(100vh - 80px); /* Leave room for bottom nav */
+    height: calc(100dvh - 80px);
     overflow-y: auto;
     animation: fadeIn 0.4s ease forwards;
 }
