@@ -133,6 +133,9 @@ navFavoritesBtn.addEventListener('click', () => switchView('favoritesView'));
 const menuBtn = document.getElementById('menuBtn');
 const topMenu = document.getElementById('topMenu');
 menuBtn.addEventListener('click', () => topMenu.classList.toggle('hidden'));
+const menuBtnPlayer = document.getElementById('menuBtnPlayer');
+const topMenuPlayer = document.getElementById('topMenuPlayer');
+menuBtnPlayer.addEventListener('click', () => topMenuPlayer.classList.toggle('hidden'));
 
 document.querySelectorAll('.menu-item').forEach(item => {
     item.addEventListener('click', (e) => {

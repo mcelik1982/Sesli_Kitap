@@ -116,7 +116,15 @@
                     <span class="playing-from">ŞU AN ÇALINIYOR</span>
                     <span class="playlist-name" id="playerBookTitleSmall">Kitap Seçilmedi</span>
                 </div>
-                <button class="icon-btn glass-btn"><i class="fas fa-ellipsis-v"></i></button>
+                                <button class="icon-btn glass-btn" id="menuBtnPlayer" title="Menü">
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+                <!-- Dropdown menu for player view -->
+                <div id="topMenuPlayer" class="top-menu hidden">
+                    <button class="menu-item" data-view="libraryView">Ana Sayfa</button>
+                    <button class="menu-item" data-view="searchView">Ara</button>
+                    <button class="menu-item" data-view="favoritesView">Kitaplığım</button>
+                </div>
             </header>
 
             <main class="main-content">
