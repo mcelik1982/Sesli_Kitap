@@ -125,25 +125,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     backToLibraryBtn.addEventListener('click', () => switchView('libraryView'));
-navLibraryBtn.addEventListener('click', () => switchView('libraryView'));
-navSearchBtn.addEventListener('click', () => switchView('searchView'));
-navFavoritesBtn.addEventListener('click', () => switchView('favoritesView'));
+    navLibraryBtn.addEventListener('click', () => switchView('libraryView'));
+    navSearchBtn.addEventListener('click', () => switchView('searchView'));
+    navFavoritesBtn.addEventListener('click', () => switchView('favoritesView'));
 
-// Top menu button & dropdown handling
-const menuBtn = document.getElementById('menuBtn');
-const topMenu = document.getElementById('topMenu');
-menuBtn.addEventListener('click', () => topMenu.classList.toggle('hidden'));
-const menuBtnPlayer = document.getElementById('menuBtnPlayer');
-const topMenuPlayer = document.getElementById('topMenuPlayer');
-menuBtnPlayer.addEventListener('click', () => topMenuPlayer.classList.toggle('hidden'));
+    // Player view menu button handling
+    const menuBtnPlayer = document.getElementById('menuBtnPlayer');
+    const topMenuPlayer = document.getElementById('topMenuPlayer');
+    menuBtnPlayer.addEventListener('click', () => topMenuPlayer.classList.toggle('hidden'));
 
-document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-        const viewId = e.target.getAttribute('data-view');
-        switchView(viewId);
-        topMenu.classList.add('hidden');
+    document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+            const viewId = e.target.getAttribute('data-view');
+            switchView(viewId);
+            // Hide the player dropdown if open
+            if (topMenuPlayer) topMenuPlayer.classList.add('hidden');
+        });
     });
-});
+
     // ---- Search Logic ----
     searchInput.addEventListener('input', (e) => {
         renderSearch(e.target.value);
