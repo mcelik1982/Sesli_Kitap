@@ -235,7 +235,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
         request.onsuccess = (event) => {
             books = event.target.result;
-            renderLibrary();
+            
+            if (books.length === 0 && !localStorage.getItem('defaultsLoaded')) {
+                populateDefaultBooks();
+            } else {
+                renderLibrary();
+            }
+        };
+    }
+
+    function populateDefaultBooks() {
+        localStorage.setItem('defaultsLoaded', 'true');
+        
+        const transaction = db.transaction(['books'], 'readwrite');
+        const objectStore = transaction.objectStore('books');
+
+        objectStore.add({
+            title: "Kitap 1",
+            author: "Varsayılan",
+            coverUrl: "kitap1.png",
+            audioUrl: "kitap1.mp3",
+            progress: 0,
+            duration: 0,
+            notes: [],
+            isFavorite: false
+        });
+
+        objectStore.add({
+            title: "Kitap 2",
+            author: "Varsayılan",
+            coverUrl: "kitap2.png",
+            audioUrl: "kitap2.mp3",
+            progress: 0,
+            duration: 0,
+            notes: [],
+            isFavorite: false
+        });
+
+        transaction.oncomplete = () => {
+            // Reload books after adding defaults
+            const getReq = db.transaction(['books'], 'readonly').objectStore('books').getAll();
+            getReq.onsuccess = (e) => {
+                books = e.target.result;
+                renderLibrary();
+            };
         };
     }
 
@@ -285,6 +328,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if(book.coverBlob) {
                 coverUrl = URL.createObjectURL(book.coverBlob);
                 objectUrls.push(coverUrl);
+            } else if(book.coverUrl) {
+                coverUrl = book.coverUrl;
             }
 
             const favClass = book.isFavorite ? 'active' : '';
@@ -375,7 +420,12 @@ document.addEventListener('DOMContentLoaded', () => {
         playerBookCover.src = coverUrl;
         
         // Generate Audio URL
-        const audioUrl = URL.createObjectURL(book.audioBlob);
+        let audioUrl;
+        if(book.audioBlob) {
+            audioUrl = URL.createObjectURL(book.audioBlob);
+        } else if(book.audioUrl) {
+            audioUrl = book.audioUrl;
+        }
         audioPlayer.src = audioUrl;
         
         // Apply saved progress
