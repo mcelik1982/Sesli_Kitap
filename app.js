@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const objectStore = transaction.objectStore('books');
 
         objectStore.add({
-            title: "Kitap 1",
+            title: "Kül Bahçesindeki Tohum",
             author: "Varsayılan",
             coverUrl: "kitap1.png",
             audioUrl: "kitap1.mp3",
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         objectStore.add({
-            title: "Kitap 2",
+            title: "Dedem Çınar'ın Gülümsemesi",
             author: "Varsayılan",
             coverUrl: "kitap2.png",
             audioUrl: "kitap2.mp3",
