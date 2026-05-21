@@ -1,15 +1,15 @@
 :root {
-    /* Premium Blue Theme Colors - Even Lighter (Marine Blue) */
-    --bg-main: #1a4971;
-    --bg-darker: #11314f;
-    --glass-bg: rgba(43, 98, 145, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --text-primary: #ffffff;
-    --text-secondary: #c9e1f5;
-    --accent-color: #64ffda; /* Teal accent */
-    --accent-color-hover: #52e0c0;
-    --gradient-1: #2a618f;
-    --gradient-2: #3a7ca5;
+    /* Premium Slate Blue Theme (App-like & Modern) */
+    --bg-main: #1e293b;
+    --bg-darker: #0f172a;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --accent-color-hover: #0ea5e9;
+    --gradient-1: #1e293b;
+    --gradient-2: #334155;
 }
 
 * {
@@ -25,7 +25,6 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     height: 100vh;
-    height: 100dvh;
     display: flex;
     justify-content: center;
     overflow: hidden;
@@ -69,7 +68,6 @@ body {
     width: 100%;
     max-width: 450px;
     height: 100vh;
-    height: 100dvh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -93,7 +91,6 @@ body {
     display: none;
     flex-direction: column;
     height: calc(100vh - 80px); /* Leave room for bottom nav */
-    height: calc(100dvh - 80px);
     overflow-y: auto;
     animation: fadeIn 0.4s ease forwards;
 }
@@ -566,9 +563,10 @@ button {
     justify-content: space-around;
     align-items: center;
     height: 80px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
+    max-width: 450px;
     z-index: 10;
 }
 
